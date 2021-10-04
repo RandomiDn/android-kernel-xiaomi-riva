@@ -15,8 +15,8 @@ MAKE_FLAGS=(
 JOBS=$(nproc --all)
 
 export PATH=$ROOT/arm64-gcc/bin:$ROOT/arm-gcc/bin:$PATH
-export KBUILD_BUILD_USER=mamles
-export KBUILD_BUILD_HOST=drone
+export KBUILD_BUILD_USER=arrayfs
+export KBUILD_BUILD_HOST=iDn/debian:buster
 
 function clone() {
     message "Cloning dependencies..."
