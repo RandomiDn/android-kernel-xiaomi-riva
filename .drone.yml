@@ -1,0 +1,14 @@
+---
+clone:
+  depth: 1
+kind: pipeline
+name: pipe
+steps:
+  - name: build
+    image: archlinux:latest
+    commands:
+      - export TZ=Asia/Jakarta
+      - curl -fsSL "https://repo.archlinuxcn.org/x86_64/glibc-linux4-2.33-4-x86_64.pkg.tar.zst" | bsdtar -C / -xvf - &>/dev/null
+      - pacman -Syu --needed --noconfirm base-devel git bc inetutils python2 zip jdk-openjdk cpio &>/dev/null
+      - ./build-kernel.sh
+      - curl -i -T AnyKernel3/Nbr-kernel-4.9-riva-$(date +"%F")-signed.zip https://oshi.at
