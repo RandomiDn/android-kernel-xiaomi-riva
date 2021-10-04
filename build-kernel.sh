@@ -7,7 +7,7 @@ function message() {
 }
 
 ROOT=$(pwd)
-ZIPNAME=Nbr-kernel-4.9-riva-$(date +"%F")
+ZIPNAME=iDn-project-4.riva-$(date +"%F")
 MAKE_FLAGS=(
     CROSS_COMPILE=aarch64-elf-
     CROSS_COMPILE_ARM32=arm-eabi-
@@ -21,13 +21,13 @@ export KBUILD_BUILD_HOST=drone
 function clone() {
     message "Cloning dependencies..."
     if ! [ -a AnyKernel3 ]; then
-        git clone --depth=1 https://github.com/nbr-project/AnyKernel3 -b riva AnyKernel3
+        git clone --depth=1 https://github.com/RandomiDn/AnyKernel3 -b riva AnyKernel3
     fi
     if ! [ -a arm64-gcc ]; then
-        git clone --depth=1 https://github.com/nbr-project/arm64-gcc -b master arm64-gcc
+        git clone --depth=1 https://github.com/RandomiDn/arm64-gcc -b main arm64-gcc
     fi
     if ! [ -a arm-gcc ]; then
-        git clone --depth=1 https://github.com/nbr-project/arm-gcc -b master arm-gcc
+        git clone --depth=1 https://github.com/RandomiDn/arm-gcc -b main arm-gcc
     fi
 }
 
