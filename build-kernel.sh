@@ -45,8 +45,7 @@ cdir() {
 # The defult directory where the kernel should be placed
 KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
-KBUILD_BUILD_USER=$BUILD_USER
-KBUILD_BUILD_HOST=$BUILD_HOST
+
 # The name of the Kernel, to name the ZIP
 ZIPNAME="idnProject"
 
@@ -142,7 +141,7 @@ then
 	if [ "$CIRCLECI" ]
 	then
 		export KBUILD_BUILD_VERSION=$CIRCLE_BUILD_NUM
-		export KBUILD_BUILD_HOST=$BUILD_HOST
+		export KBUILD_BUILD_HOST="-@iDn"
 		export CI_BRANCH=$CIRCLE_BRANCH
 	fi
 	if [ "$DRONE" ]
