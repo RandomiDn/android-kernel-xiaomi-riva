@@ -212,7 +212,7 @@ exports() {
 		PATH=$TC_DIR/bin/:$PATH
 	elif [ $COMPILER = "gcc" ]
 	then
-		KBUILD_COMPILER_STRING=$("$GCC64_DIR"/bin/aaarch64-elf-gcc --version | head -n 1)
+		KBUILD_COMPILER_STRING=$("$GCC64_DIR"/bin/aarch64-elf-gcc --version | head -n 1)
 		PATH=$GCC64_DIR/bin/:$GCC32_DIR/bin/:$ELF_DIR/bin/:/usr/bin:$PATH
 	fi
 
@@ -289,8 +289,8 @@ build_kernel() {
 	then
 		MAKE+=(
 			CROSS_COMPILE_ARM32=arm-eabi- \
-			CROSS_COMPILE=aarch64-linux-android-
-			LD=aarch64-elf-ld
+			CROSS_COMPILE=aarch64-elf-
+			LD=aarch64-elf-ld.bfd
 		)
 	fi
 	
