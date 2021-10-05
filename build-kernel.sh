@@ -45,19 +45,20 @@ cdir() {
 # The defult directory where the kernel should be placed
 KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
-
+KBUILD_BUILD_USER=$BUILD_USER
+KBUILD_BUILD_HOST=$BUILD_HOST
 # The name of the Kernel, to name the ZIP
 ZIPNAME="idnProject"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
-AUTHOR="Arrayfs"
+AUTHOR=${BUILD_USER}
 
 # Architecture
 ARCH=arm64
 
 # The name of the device for which the kernel is built
-MODEL="Xiaomi iDn"
+MODEL="Xiaomi 5aiDn"
 
 # The codename of the device
 DEVICE="riva"
@@ -141,7 +142,7 @@ then
 	if [ "$CIRCLECI" ]
 	then
 		export KBUILD_BUILD_VERSION=$CIRCLE_BUILD_NUM
-		export KBUILD_BUILD_HOST="Debian"
+		export KBUILD_BUILD_HOST=${BUILD_USER}
 		export CI_BRANCH=$CIRCLE_BRANCH
 	fi
 	if [ "$DRONE" ]
