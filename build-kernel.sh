@@ -175,7 +175,7 @@ DATE=$(TZ=GMT-8 date +"%Y%m%d-%H%M")
 		msg "|| Cloning GCC in repo ||"
 #	        git clone https://github.com/RandomiDn/arm64-gcc -b main gcc64
 		git clone https://github.com/RandomiDn/arm-gcc -b main gcc32
-		git clone https://github.com/Correctl/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 lineage-18.1 gcc64
+git clone https://github.com/Correctl/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9.git -b lineage-18.1 gcc64
 #		git clone https://github.com/Correctl/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-gnu-6.4.1 -b lineage-18.1 gcc64
 		GCC64_DIR=$KERNEL_DIR/gcc64
 		GCC32_DIR=$KERNEL_DIR/gcc32
