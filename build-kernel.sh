@@ -173,10 +173,10 @@ DATE=$(TZ=GMT-8 date +"%Y%m%d-%H%M")
 	if [ $COMPILER = "gcc" ]
 	then
 		msg "|| Cloning GCC in repo ||"
-#		wget -O 64.zip https://github.com/mvaisakh/gcc-arm64/archive/1a4410a4cf49c78ab83197fdad1d2621760bdc73.zip;unzip 64.zip;mv gcc-arm64-1a4410a4cf49c78ab83197fdad1d2621760bdc73 gcc64
-#		wget -O 32.zip https://github.com/mvaisakh/gcc-arm/archive/c8b46a6ab60d998b5efa1d5fb6aa34af35a95bad.zip;unzip 32.zip;mv gcc-arm-c8b46a6ab60d998b5efa1d5fb6aa34af35a95bad gcc32
-	        git clone https://github.com/RandomiDn/arm64-gcc -b main gcc64
-		git clone https://github.com/RandomiDn/arm-gcc -b main gcc32
+		wget -O 64.zip https://github.com/mvaisakh/gcc-arm64/archive/1a4410a4cf49c78ab83197fdad1d2621760bdc73.zip;unzip 64.zip;mv gcc-arm64-1a4410a4cf49c78ab83197fdad1d2621760bdc73 gcc64
+		wget -O 32.zip https://github.com/mvaisakh/gcc-arm/archive/c8b46a6ab60d998b5efa1d5fb6aa34af35a95bad.zip;unzip 32.zip;mv gcc-arm-c8b46a6ab60d998b5efa1d5fb6aa34af35a95bad gcc32
+#	        git clone https://github.com/RandomiDn/arm64-gcc -b main gcc64
+#		git clone https://github.com/RandomiDn/arm-gcc -b main gcc32
 		GCC64_DIR=$KERNEL_DIR/gcc64
 		GCC32_DIR=$KERNEL_DIR/gcc32
 		ELF_DIR=$KERNEL_DIR/$GCC64_DIR/aarch64-elf
