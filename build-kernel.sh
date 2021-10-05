@@ -1,5 +1,5 @@
 #! /bin/bash
-# shellcheck disable=SC2154
+ shellcheck disable=SC2154
 
  # Script For Building Android arm64 Kernel
  #
@@ -57,14 +57,14 @@ AUTHOR="Arrayfs"
 ARCH=arm64
 
 # The name of the device for which the kernel is built
-MODEL="Xiaomi Random iDn"
+MODEL="Xiaomi iDn"
 
 # The codename of the device
 DEVICE="riva"
 
 # The defconfig which should be used. Get it from config.gz from
 # your device or check source
-DEFCONFIG=msm8937_defconfig
+DEFCONFIG=riva_defconfig
 
 # Build modules. 0 = NO | 1 = YES
 MODULES=1
@@ -81,7 +81,7 @@ PTTG=1
 	if [ $PTTG = 1 ]
 	then
 		# Set Telegram Chat ID
-		chat_id="-1001204725709"
+		chat_id=$chat_id
 token=$token
 	fi
 
