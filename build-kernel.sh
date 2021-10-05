@@ -175,11 +175,11 @@ DATE=$(TZ=GMT-8 date +"%Y%m%d-%H%M")
 		msg "|| Cloning GCC in repo ||"
 #	        git clone https://github.com/RandomiDn/arm64-gcc -b main gcc64
 		git clone https://github.com/RandomiDn/arm-gcc -b main gcc32
-#		git clone https://github.com/Correctl/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 lineage-18.1 gcc64
-		git clone https://github.com/Correctl/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-gnu-6.4.1 -b lineage-18.1 gcc64
+		git clone https://github.com/Correctl/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 lineage-18.1 gcc64
+#		git clone https://github.com/Correctl/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-gnu-6.4.1 -b lineage-18.1 gcc64
 		GCC64_DIR=$KERNEL_DIR/gcc64
 		GCC32_DIR=$KERNEL_DIR/gcc32
-		ELF_DIR=$KERNEL_DIR/$GCC64_DIR/aarch64-linux-gnu
+		ELF_DIR=$KERNEL_DIR/$GCC64_DIR/aarch64-linux-android
 
 
 	fi
@@ -215,7 +215,7 @@ exports() {
 		PATH=$TC_DIR/bin/:$PATH
 	elif [ $COMPILER = "gcc" ]
 	then
-		KBUILD_COMPILER_STRING=$("$GCC64_DIR"/bin/aaarch64-linux-gnu-gcc --version | head -n 1)
+		KBUILD_COMPILER_STRING=$("$GCC64_DIR"/bin/aaarch64-linux-android-gcc --version | head -n 1)
 		PATH=$GCC64_DIR/bin/:$GCC32_DIR/bin/:$ELF_DIR/bin/:/usr/bin:$PATH
 	fi
 
@@ -292,8 +292,8 @@ build_kernel() {
 	then
 		MAKE+=(
 			CROSS_COMPILE_ARM32=arm-eabi- \
-			CROSS_COMPILE=aarch64-linux-gnu-
-			LD=aarch64-linux-gnu-ld
+			CROSS_COMPILE=aarch64-linux-android-
+			LD=aarch64-linux-android-ld
 		)
 	fi
 	
