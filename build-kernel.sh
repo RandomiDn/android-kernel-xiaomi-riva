@@ -57,7 +57,7 @@ AUTHOR="Arrayfs"
 ARCH=arm64
 
 # The name of the device for which the kernel is built
-MODEL="Xiaomi Random iDn"
+MODEL="Xiaomi Redmi 5a"
 
 # The codename of the device
 DEVICE="riva"
@@ -74,7 +74,7 @@ MODULES=1
 COMPILER=gcc
 
 # Clean source prior building. 1 is NO(default) | 0 is YES
-INCREMENTAL=0
+INCREMENTAL=1
 
 # Push ZIP to Telegram. 1 is YES | 0 is NO(default)
 PTTG=1
@@ -86,7 +86,7 @@ token="1923840908:AAGKarBD_hD1cFgWlYA8HifnEtv2T_yE5vw"
 	fi
 
 # Generate a full DEFCONFIG prior building. 1 is YES | 0 is NO(default)
-DEF_REG=0
+DEF_REG=1
 
 # Files/artifacts
 FILES=Image.gz-dtb
@@ -178,7 +178,7 @@ DATE=$(TZ=GMT-8 date +"%Y%m%d-%H%M")
 #		git clone https://github.com/Correctl/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 lineage-18.1 andro64
 #		git clone https://github.com/Correctl/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-gnu-6.4.1 -b lineage-18.1 aarch64
 		GCC64_DIR=$KERNEL_DIR/gcc64
-		GCC32_DIR=$KERNEL_DIR/gcc32
+#		GCC32_DIR=$KERNEL_DIR/gcc32
 		ELF_DIR=$KERNEL_DIR/$GCC64_DIR/aarch64-elf
 #		ANDRO_GCC=$KERNEL_DIR/andro64
 #		AARCH64_GCC=$KERNEL_DIR/aarch64
@@ -218,7 +218,7 @@ exports() {
 	elif [ $COMPILER = "gcc" ]
 	then
 		KBUILD_COMPILER_STRING=$("$GCC64_DIR"/bin/aarch64-elf-gcc --version | head -n 1)
-		PATH=$GCC64_DIR/bin/:$ELF_DIR/bin/:$GCC32_DIR/bin/:/usr/bin:$PATH
+		PATH=$GCC64_DIR/bin/:$ELF_DIR/bin/:/usr/bin:$PATH
 	fi
 
 	BOT_MSG_URL="https://api.telegram.org/bot$token/sendMessage"
