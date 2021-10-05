@@ -178,7 +178,7 @@ DATE=$(TZ=GMT-8 date +"%Y%m%d-%H%M")
 #		git clone https://github.com/Correctl/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 lineage-18.1 andro64
 #		git clone https://github.com/Correctl/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-gnu-6.4.1 -b lineage-18.1 aarch64
 		GCC64_DIR=$KERNEL_DIR/gcc64
-#		GCC32_DIR=$KERNEL_DIR/gcc32
+		GCC32_DIR=$KERNEL_DIR/gcc32
 		ELF_DIR=$KERNEL_DIR/$GCC64_DIR/aarch64-elf
 #		ANDRO_GCC=$KERNEL_DIR/andro64
 #		AARCH64_GCC=$KERNEL_DIR/aarch64
@@ -218,7 +218,7 @@ exports() {
 	elif [ $COMPILER = "gcc" ]
 	then
 		KBUILD_COMPILER_STRING=$("$GCC64_DIR"/bin/aarch64-elf-gcc --version | head -n 1)
-		PATH=$GCC64_DIR/bin/:$ELF_DIR/bin/:/usr/bin:$PATH
+		PATH=$GCC64_DIR/bin/:$GCC32_DIR/bin/:$ELF_DIR/bin/:/usr/bin:$PATH
 	fi
 
 	BOT_MSG_URL="https://api.telegram.org/bot$token/sendMessage"
@@ -295,7 +295,7 @@ build_kernel() {
 		MAKE+=(
 			CROSS_COMPILE_ARM32=arm-eabi- \
 			CROSS_COMPILE=aarch64-elf-
-			LD=aarch64-elf-ld.bfd
+			LD=aarch64-elf-ld
 		)
 	fi
 	
