@@ -64,7 +64,7 @@ DEVICE="riva"
 
 # The defconfig which should be used. Get it from config.gz from
 # your device or check source
-DEFCONFIG=riva_defconfig
+DEFCONFIG=msm8937_defconfig
 
 # Build modules. 0 = NO | 1 = YES
 MODULES=1
