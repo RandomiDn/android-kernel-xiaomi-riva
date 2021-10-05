@@ -52,7 +52,7 @@ ZIPNAME="idnProject"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
-AUTHOR=${BUILD_USER}
+AUTHOR="-Arrayfs"
 
 # Architecture
 ARCH=arm64
@@ -142,7 +142,7 @@ then
 	if [ "$CIRCLECI" ]
 	then
 		export KBUILD_BUILD_VERSION=$CIRCLE_BUILD_NUM
-		export KBUILD_BUILD_HOST=${BUILD_USER}
+		export KBUILD_BUILD_HOST=$BUILD_HOST
 		export CI_BRANCH=$CIRCLE_BRANCH
 	fi
 	if [ "$DRONE" ]
