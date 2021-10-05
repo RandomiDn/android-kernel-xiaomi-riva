@@ -57,14 +57,14 @@ AUTHOR="Arrayfs"
 ARCH=arm64
 
 # The name of the device for which the kernel is built
-MODEL="Xiaomi Redmi 5a"
+MODEL="Xiaomi Random iDn"
 
 # The codename of the device
 DEVICE="riva"
 
 # The defconfig which should be used. Get it from config.gz from
 # your device or check source
-DEFCONFIG=riva_defconfig
+DEFCONFIG=msm8937_defconfig
 
 # Build modules. 0 = NO | 1 = YES
 MODULES=1
