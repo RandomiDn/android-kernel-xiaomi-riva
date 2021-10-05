@@ -173,14 +173,11 @@ DATE=$(TZ=GMT-8 date +"%Y%m%d-%H%M")
 	if [ $COMPILER = "gcc" ]
 	then
 		msg "|| Cloning GCC in repo ||"
-#	        git clone https://github.com/RandomiDn/arm64-gcc -b main gcc64
+	        git clone https://github.com/RandomiDn/arm64-gcc -b main gcc64
 		git clone https://github.com/RandomiDn/arm-gcc -b main gcc32
-git clone https://github.com/Correctl/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9.git -b lineage-18.1 gcc64
-#		git clone https://github.com/Correctl/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-gnu-6.4.1 -b lineage-18.1 gcc64
 		GCC64_DIR=$KERNEL_DIR/gcc64
 		GCC32_DIR=$KERNEL_DIR/gcc32
-		ELF_DIR=$KERNEL_DIR/$GCC64_DIR/aarch64-linux-android
-
+		ELF_DIR=$KERNEL_DIR/$GCC64_DIR/aarch64-elf
 
 	fi
 	
@@ -215,7 +212,7 @@ exports() {
 		PATH=$TC_DIR/bin/:$PATH
 	elif [ $COMPILER = "gcc" ]
 	then
-		KBUILD_COMPILER_STRING=$("$GCC64_DIR"/bin/aaarch64-linux-android-gcc --version | head -n 1)
+		KBUILD_COMPILER_STRING=$("$GCC64_DIR"/bin/aaarch64-elf-gcc --version | head -n 1)
 		PATH=$GCC64_DIR/bin/:$GCC32_DIR/bin/:$ELF_DIR/bin/:/usr/bin:$PATH
 	fi
 
@@ -263,7 +260,7 @@ build_kernel() {
 
 	if [ "$PTTG" = 1 ]
  	then
-		tg_post_msg "<b>$KBUILD_BUILD_VERSION GCC ON Build Dimulai Cukk...</b>%0A<b>Debian OS: </b><code>$DISTRO</code>%0A<b>Kernel Version : </b><code>$KERVER</code>%0A<b>Date : </b><code>$(TZ=$TZ date)</code>%0A<b>Device : </b><code>$MODEL [$DEVICE]</code>%0A<b>Pipeline Host : </b><code>$KBUILD_BUILD_HOST</code>%0A<b>Host Core Count : </b><code>$PROCS</code>%0A<b>Compiler Used : </b><code>$KBUILD_COMPILER_STRING</code>%0A<b>Branch : </b><code>$CI_BRANCH</code>%0A<b>Top Commit : </b><code>$COMMIT_HEAD</code>%0A<a href='$SERVER_URL'>Link</a>"
+		tg_post_msg "<b>$KBUILD_BUILD_VERSION GCC ON CI Build Cukk</b>%0A<b>Debian OS: </b><code>$DISTRO</code>%0A<b>Kernel Version : </b><code>$KERVER</code>%0A<b>Date : </b><code>$(TZ=$TZ date)</code>%0A<b>Device : </b><code>$MODEL [$DEVICE]</code>%0A<b>Pipeline Host : </b><code>$KBUILD_BUILD_HOST</code>%0A<b>Host Core Count : </b><code>$PROCS</code>%0A<b>Compiler Used : </b><code>$KBUILD_COMPILER_STRING</code>%0A<b>Branch : </b><code>$CI_BRANCH</code>%0A<b>Top Commit : </b><code>$COMMIT_HEAD</code>%0A<a href='$SERVER_URL'>Link</a>"
 	fi
 
 	make O=out $DEFCONFIG
@@ -293,7 +290,7 @@ build_kernel() {
 		MAKE+=(
 			CROSS_COMPILE_ARM32=arm-eabi- \
 			CROSS_COMPILE=aarch64-linux-android-
-			LD=aarch64-linux-android-ld
+			LD=aarch64-elf-ld
 		)
 	fi
 	
