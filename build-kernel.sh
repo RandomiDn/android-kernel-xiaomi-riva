@@ -82,7 +82,7 @@ PTTG=1
 	then
 		# Set Telegram Chat ID
 		chat_id="-1001204725709"
-token="1923840908:AAGKarBD_hD1cFgWlYA8HifnEtv2T_yE5vw"
+token=$token
 	fi
 
 # Generate a full DEFCONFIG prior building. 1 is YES | 0 is NO(default)
