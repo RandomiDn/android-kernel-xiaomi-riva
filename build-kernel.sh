@@ -178,7 +178,7 @@ DATE=$(TZ=GMT-8 date +"%Y%m%d-%H%M")
 	fi
 
 	msg "|| Cloning Anykernel ||"
-	git clone --depth 1 --no-single-branch https://github.com/RandomiDn/AnyKernel3 -b riva
+	git clone --depth 1 --no-single-branch https://github.com/RandomiDn/Anykernel3 -b riva11
 	msg "|| Cloning libufdt ||"
 	git clone https://android.googlesource.com/platform/system/libufdt "$KERNEL_DIR"/scripts/ufdt/libufdt
 	if [ $MODULES = "1" ]
