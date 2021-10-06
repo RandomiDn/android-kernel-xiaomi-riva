@@ -85,7 +85,7 @@ BUILD_DTBO=1
 	then 
 		# Set this to your dtbo path. 
 		# Defaults in folder out/arch/arm64/boot/dts
-		DTBO_PATH="xiaomi/riva-msm8917-overlay.dtbo"
+		DTBO_PATH="qcom/msm8917-pmi8937-qrd-sku5-riva.dtb"
 	fi
 
 # Sign the zipfile
