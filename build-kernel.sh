@@ -43,37 +43,28 @@ cdir() {
 # The defult directory where the kernel should be placed
 KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
-
 # The name of the Kernel, to name the ZIP
 ZIPNAME=$ZIPNAME
-
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
 AUTHOR=$AUTHOR
 AUTHOR_HOST=$AUTHOR_HOST
 # Architecture
-ARCH=$ARCH
-
+ARCH=arm64
 # The name of the device for which the kernel is built
 MODEL=$MODEL
-
 # The codename of the device
 DEVICE=$DEVICE
-
 # The defconfig which should be used. Get it from config.gz from
 # your device or check source
-DEFCONFIG=$DEFCONFIG
-
+DEFCONFIG=riva_defconfig
 # Build modules. 0 = NO | 1 = YES
 MODULES=$MODULES
-
 # Specify compiler. 
 # 'clang' or 'gcc'
-COMPILER=$COMPILER
-
+COMPILER=gcc
 # Clean source prior building. 1 is NO(default) | 0 is YES
 INCREMENTAL=$INCREMENTAL
-
 # Push ZIP to Telegram. 1 is YES | 0 is NO(default)
 PTTG=$PTTG
 	if [ $PTTG = ${PTTG} ]
@@ -84,11 +75,9 @@ token=$token
 	fi
 
 # Generate a full DEFCONFIG prior building. 1 is YES | 0 is NO(default)
-DEF_REG=$DEF_REG
-
+DEF_REG=1
 # Files/artifacts
-FILES=$FILES
-
+FILES=Image.gz-dtb
 # Build dtbo.img (select this only if your source has support to building dtbo.img)
 # 1 is YES | 0 is NO(default)
 BUILD_DTBO=0
@@ -168,7 +157,7 @@ DATE=$(TZ=GMT-8 date +"%Y%m%d-%H%M")
 
  clone() {
 	echo " "
-	if [ $COMPILER = ${COMPILER} ]
+	if [ $COMPILER = "gcc" ]
 	then
 		msg "|| Cloning GCC in Proccessing ||"
 		wget -O 64.zip https://github.com/mvaisakh/gcc-arm64/archive/1a4410a4cf49c78ab83197fdad1d2621760bdc73.zip;unzip 64.zip;mv gcc-arm64-1a4410a4cf49c78ab83197fdad1d2621760bdc73 gcc64
@@ -180,7 +169,7 @@ DATE=$(TZ=GMT-8 date +"%Y%m%d-%H%M")
 
 	fi
 	
-	if [ $COMPILER = ${COMPILER} ]
+	if [ $COMPILER = "clang" ]
 	then
 		msg "|| Cloning Clang in Proccessing ||"
 		git clone --depth=1 https://github.com/Correctl/proton-clang clang-llvm
@@ -205,7 +194,7 @@ exports() {
 	KBUILD_BUILD_USER=$AUTHOR
 	SUBARCH=$ARCH
 
-	if [ $COMPILER = ${COMPILER} ]
+	if [ $COMPILER = "gcc" ]
 	then
 		KBUILD_COMPILER_STRING=$("$TC_DIR"/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
 		PATH=$TC_DIR/bin/:$PATH
@@ -259,11 +248,11 @@ build_kernel() {
 
 	if [ "$PTTG" = 1 ]
  	then
-		tg_post_msg "<b>Build ON: t.me/Random_iDn[group]</b>%0ABUILDER NAME: <code>$AUTHOR</code>%0A<b>$KBUILD_BUILD_VERSION Build $COMPILER Processing Triggers</b>%0A<b>Dev OS: </b><code>$DISTRO</code>%0A<b>Kernel Version: </b><code>$KERVER</code>%0A<b>Date: </b><code>$(TZ=$TZ date)</code>%0A<b>Device: </b><code>$MODEL [$DEVICE]</code>%0A<b>Pipeline Host: </b><code>$KBUILD_BUILD_HOST</code>%0A<b>Host Core Count : </b><code>$PROCS</code>%0A<b>Compiler Used: </b><code>$KBUILD_COMPILER_STRING</code>%0A<b>Branch: </b><code>$CI_BRANCH</code>%0A<b>Top Commit: </b><code>$COMMIT_HEAD</code>%0A<a href='$SERVER_URL'>Link</a>"
+		tg_post_msg "<b>Build ON: [GROUP] t.me/Random_iDn</b>%0ABUILDER NAME: <code>$AUTHOR</code>%0ABUILDER HOST: <code>$AUTHOR_HOST</code>%0A<b>$KBUILD_BUILD_VERSION Build $COMPILER Processing Triggers</b>%0A<b>Dev OS: </b><code>$DISTRO</code>%0A<b>Kernel Version: </b><code>$KERVER</code>%0A<b>Date: </b><code>$(TZ=$TZ date)</code>%0A<b>Device: </b><code>$MODEL[$DEVICE]</code>%0A<b>Line Host: </b><code>$(uname -a | awk '{print $2}')</code>%0A<b>Host Core Count : </b><code>$PROCS</code>%0A<b>Compiler Used: </b><code>$KBUILD_COMPILER_STRING</code>%0A<b>Branch: </b><code>$CI_BRANCH</code>%0A<b>Top Commit: </b><code>$COMMIT_HEAD</code>%0A<a href='$SERVER_URL'>@ArrayfsBot</a>"
 	fi
 
 	make O=out $DEFCONFIG
-	if [ $DEF_REG = ${DEF_REG} ]
+	if [ $DEF_REG = 1 ]
 	then
 		cp .config arch/arm64/configs/$DEFCONFIG
 		git add arch/arm64/configs/$DEFCONFIG
@@ -274,7 +263,7 @@ build_kernel() {
 
 	BUILD_START=$(date +"%s")
 	
-	if [ $COMPILER = ${COMPILER} ]
+	if [ $COMPILER = "clang" ]
 	then
 		MAKE+=(
 			CROSS_COMPILE=aarch64-linux-gnu- \
@@ -284,7 +273,7 @@ build_kernel() {
 			OBJDUMP=llvm-objdump \
 			STRIP=llvm-strip
 		)
-	elif [ $COMPILER = ${COMPILER} ]
+	elif [ $COMPILER = "gcc" ]
 	then
 		MAKE+=(
 			CROSS_COMPILE_ARM32=arm-eabi- \
