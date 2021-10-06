@@ -59,12 +59,12 @@ DEVICE=$DEVICE
 # your device or check source
 DEFCONFIG=riva_defconfig
 # Build modules. 0 = NO | 1 = YES
-MODULES=$MODULES
+MODULES=0
 # Specify compiler. 
 # 'clang' or 'gcc'
 COMPILER=gcc
 # Clean source prior building. 1 is NO(default) | 0 is YES
-INCREMENTAL=$INCREMENTAL
+INCREMENTAL=1
 # Push ZIP to Telegram. 1 is YES | 0 is NO(default)
 PTTG=$PTTG
 	if [ $PTTG = ${PTTG} ]
@@ -75,12 +75,12 @@ token=$token
 	fi
 
 # Generate a full DEFCONFIG prior building. 1 is YES | 0 is NO(default)
-DEF_REG=1
+DEF_REG=0
 # Files/artifacts
 FILES=Image.gz-dtb
 # Build dtbo.img (select this only if your source has support to building dtbo.img)
 # 1 is YES | 0 is NO(default)
-BUILD_DTBO=0
+BUILD_DTBO=1
 	if [ $BUILD_DTBO = 1 ]
 	then 
 		# Set this to your dtbo path. 
@@ -194,11 +194,11 @@ exports() {
 	KBUILD_BUILD_USER=$AUTHOR
 	SUBARCH=$ARCH
 
-	if [ $COMPILER = "gcc" ]
+	if [ $COMPILER = "clang" ]
 	then
 		KBUILD_COMPILER_STRING=$("$TC_DIR"/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
 		PATH=$TC_DIR/bin/:$PATH
-	elif [ $COMPILER = ${COMPILER} ]
+	elif [ $COMPILER = "gcc" ]
 	then
 		KBUILD_COMPILER_STRING=$("$GCC64_DIR"/bin/aarch64-elf-gcc --version | head -n 1)
 		PATH=$GCC64_DIR/bin/:$GCC32_DIR/bin/:$ELF_DIR/bin/:/usr/bin:$PATH
@@ -248,7 +248,7 @@ build_kernel() {
 
 	if [ "$PTTG" = 1 ]
  	then
-		tg_post_msg "<b>Build ON: [GROUP] t.me/Random_iDn</b>%0ABUILDER NAME: <code>$AUTHOR</code>%0ABUILDER HOST: <code>$AUTHOR_HOST</code>%0A<b>$KBUILD_BUILD_VERSION Build $COMPILER Processing Triggers</b>%0A<b>Dev OS: </b><code>$DISTRO</code>%0A<b>Kernel Version: </b><code>$KERVER</code>%0A<b>Date: </b><code>$(TZ=$TZ date)</code>%0A<b>Device: </b><code>$MODEL[$DEVICE]</code>%0A<b>Line Host: </b><code>$(uname -a | awk '{print $2}')</code>%0A<b>Host Core Count : </b><code>$PROCS</code>%0A<b>Compiler Used: </b><code>$KBUILD_COMPILER_STRING</code>%0A<b>Branch: </b><code>$CI_BRANCH</code>%0A<b>Top Commit: </b><code>$COMMIT_HEAD</code>%0A<a href='$SERVER_URL'>@ArrayfsBot</a>"
+		tg_post_msg "<b>Build ON: [GROUP] t.me/Random_iDn</b>%0ABUILDER NAME: <code>$AUTHOR</code>%0ABUILDER HOST: <code>$AUTHOR_HOST</code>%0A<b>Build [$COMPILER] Processing Triggers</b>%0A<b>Dev OS: </b><code>$DISTRO</code>%0A<b>Kernel Version: </b><code>$KERVER</code>%0A<b>Date: </b><code>$(TZ=$TZ date)</code>%0A<b>Device: </b><code>$MODEL[$DEVICE]</code>%0A<b>Line Host: </b><code>$(uname -a | awk '{print $2}')</code>%0A<b>Host Core Count : </b><code>$PROCS</code>%0A<b>Compiler Used: </b><code>$KBUILD_COMPILER_STRING</code>%0A<b>Branch: </b><code>$CI_BRANCH</code>%0A<b>Top Commit: </b><code>$COMMIT_HEAD</code>%0A<a href='$SERVER_URL'>@ArrayfsBot</a>"
 	fi
 
 	make O=out $DEFCONFIG
