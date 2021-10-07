@@ -178,7 +178,7 @@ DATE=$(TZ=GMT+7 date +"%Y%m%d-%H%M")
 	fi
 
 	msg "|| Cloning Anykernel ||"
-	git clone --depth 1 --no-single-branch https://github.com/RandomiDn/Anykernel3 -b riva11
+	git clone --depth 1 --no-single-branch https://github.com/RandomiDn/Anykernel3 -b stock-riva
 	msg "|| Cloning libufdt ||"
 	git clone https://android.googlesource.com/platform/system/libufdt "$KERNEL_DIR"/scripts/ufdt/libufdt
 	if [ $MODULES = "1" ]
@@ -356,7 +356,7 @@ gen_zip() {
  			msg "|| Signing Zip ||"
 			tg_post_msg "<code>Signing Zip file with AOSP keys..</code>"
  		fi
-		curl -sLo zipsigner-3.0.jar https://raw.githubusercontent.com/baalajimaestro/AnyKernel2/master/zipsigner-3.0.jar
+		curl -sLo zipsigner-3.0.jar https://raw.githubusercontent.com/RandomiDn/AnyKernel3/stock-riva/zipsigner-3.0.jar
 		java -jar zipsigner-3.0.jar "$ZIP_FINAL".zip "$ZIP_FINAL"-signed.zip
 		ZIP_FINAL="$ZIP_FINAL-signed"
 	fi
