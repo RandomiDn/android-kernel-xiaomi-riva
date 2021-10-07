@@ -77,7 +77,7 @@ token=$token
 # Generate a full DEFCONFIG prior building. 1 is YES | 0 is NO(default)
 DEF_REG=0
 # Files/artifacts
-FILES=Image.gz-dtb
+FILES=$(pwd)/out/arch/arm64/boot/Image.gz-dtb
 # Build dtbo.img (select this only if your source has support to building dtbo.img)
 # 1 is YES | 0 is NO(default)
 BUILD_DTBO=0
