@@ -57,7 +57,7 @@ MODEL=$MODEL
 DEVICE=$DEVICE
 # The defconfig which should be used. Get it from config.gz from
 # your device or check source
-DEFCONFIG=riva_defconfig
+DEFCONFIG=rivaidn_defconfig
 # Build modules. 0 = NO | 1 = YES
 MODULES=0
 # Specify compiler. 
@@ -252,7 +252,6 @@ build_kernel() {
 	fi
 
 	make O=out $DEFCONFIG
-	make O=out menuconfig
 	if [ $DEF_REG = 1 ]
 	then
 		cp .config arch/arm64/configs/$DEFCONFIG
