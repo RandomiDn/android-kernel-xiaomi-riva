@@ -66,8 +66,8 @@ COMPILER=gcc
 # Clean source prior building. 1 is NO(default) | 0 is YES
 INCREMENTAL=1
 # Push ZIP to Telegram. 1 is YES | 0 is NO(default)
-PTTG=$PTTG
-	if [ $PTTG = ${PTTG} ]
+PTTG=1
+	if [ $PTTG = 1 ]
 	then
 		# Set Telegram Chat ID
 		chat_id=$chat_id
