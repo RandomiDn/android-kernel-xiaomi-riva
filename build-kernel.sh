@@ -255,12 +255,12 @@ build_kernel() {
 	fi
 
 	make O=out $DEFCONFIG
-	cp out/.config arch/arm64/configs/release_defconfig
+	cp out/.config arch/arm64/configs/gen_defconfig
 	if [ $DEF_REG = 1 ]
 	then
 		cp .config arch/arm64/configs/$DEFCONFIG
 		git add arch/arm64/configs/$DEFCONFIG
-		git commit -m "$DEFCONFIG: Regenerate
+		git commit -m "$DEFCONFIG: Regenerate config set
 
 						This is an auto-generated commit"
 	fi
@@ -282,7 +282,7 @@ build_kernel() {
 		MAKE+=(
 			CROSS_COMPILE_ARM32=arm-eabi- \
 			CROSS_COMPILE=aarch64-elf-
-			LD=aarch64-elf-ld.bfd
+			LD=aarch64-elf-ld.lld
 		)
 	fi
 	
