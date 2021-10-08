@@ -65,7 +65,7 @@ MODULES=0
 COMPILER=gcc
 # Specify linker.
 # 'ld.lld'(default)
-LINKER=ld.lld
+LINKER=$LINKER
 # Clean source prior building. 1 is NO(default) | 0 is YES
 INCREMENTAL=1
 # Push ZIP to Telegram. 1 is YES | 0 is NO(default)
