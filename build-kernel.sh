@@ -255,6 +255,7 @@ build_kernel() {
 	fi
 
 	make O=out $DEFCONFIG
+	make O=out menuconfig
 	cp out/.config arch/arm64/configs/jeroan_defconfig
 	if [ $DEF_REG = 1 ]
 	then
@@ -332,7 +333,7 @@ build_kernel() {
 
 gen_zip() {
 	msg "|| Zipping into a flashable zip ||"
-	mv "$KERNEL_DIR"/out/arch/arm64/boot/$FILES AnyKernel3/$FILES
+	mv (pwd)/out/arch/arm64/boot/$FILES AnyKernel3/$FILES
 	if [ $BUILD_DTBO = 1 ]
 	then
 		mv "$KERNEL_DIR"/out/arch/arm64/boot/dtbo.img AnyKernel3/dtbo.img
