@@ -259,7 +259,7 @@ build_kernel() {
 	then
 		cp .config arch/arm64/configs/load_defconfig
 		git add arch/arm64/configs/load_defconfig
-		git commit -m "load_defconfig: Regenerate config setup
+		git commit -m "load_defconfig: Regenerate config setup release
 
 						This is an auto-generated commit"
 	fi
