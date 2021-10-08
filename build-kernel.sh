@@ -63,6 +63,9 @@ MODULES=0
 # Specify compiler. 
 # 'clang' or 'gcc'
 COMPILER=gcc
+# Specify linker.
+# 'ld.lld'(default)
+LINKER=ld.lld
 # Clean source prior building. 1 is NO(default) | 0 is YES
 INCREMENTAL=1
 # Push ZIP to Telegram. 1 is YES | 0 is NO(default)
@@ -290,7 +293,7 @@ build_kernel() {
 
 	msg "|| Started Compilation ||"
 	make -j"$PROCS" O=out \
-	     "${MAKE[@]}" 2>&1 | tee error.log
+	LD=$LINKER "${MAKE[@]}" 2>&1 | tee error.log
 	if [ $MODULES = "1" ]
 	then
 	    make -j"$PROCS" O=out \
