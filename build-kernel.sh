@@ -255,8 +255,7 @@ build_kernel() {
 	fi
 
 	make O=out $DEFCONFIG
-	make O=out menuconfig
-	cp out/.config arch/arm64/configs/jeroan_defconfig
+	cp out/.config arch/arm64/configs/release_defconfig
 	if [ $DEF_REG = 1 ]
 	then
 		cp .config arch/arm64/configs/$DEFCONFIG
