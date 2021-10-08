@@ -1,23 +1,19 @@
 #! /bin/bash
 # shellcheck disable=SC2154
-
  # Script For Building Android arm64 Kernel
- #
- # Copyright (c) 2018-2021 Panchajanya1999 <rsk52959@gmail.com>
+ # Copyright (c) 2018-2021 Update script by:Ivan Ssl
+ #Thanks to author <rsk52959@gmail.com>
  #
  # Licensed under the Apache License, Version 2.0 (the "License");
  # you may not use this file except in compliance with the License.
  # You may obtain a copy of the License at
- #
  #      http://www.apache.org/licenses/LICENSE-2.0
- #
  # Unless required by applicable law or agreed to in writing, software
  # distributed under the License is distributed on an "AS IS" BASIS,
  # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  # See the License for the specific language governing permissions and
  # limitations under the License.
  #
-
 set -e
 #Kernel building script
 # Function to show an informational message
@@ -251,7 +247,7 @@ build_kernel() {
 
 	if [ "$PTTG" = 1 ]
  	then
-		tg_post_msg "<b>Build ON: [<a href='t.me/Random_iDn'>Group</a>]</b>%0ABUILDER NAME: <code>$AUTHOR</code>%0ABUILDER HOST: <code>$AUTHOR_HOST</code>%0A<b>Build [$COMPILER] Processing Triggers</b>%0A<b>Dev OS: </b><code>$DISTRO</code>%0A<b>Kernel Version: </b><code>$KERVER</code>%0A<b>Date: </b><code>$(TZ=$TZ date)</code>%0A<b>Device: </b><code>$MODEL[$DEVICE]</code>%0A<b>Line Host: </b><code>$(uname -a | awk '{print $2}')</code>%0A<b>Host Core Count : </b><code>$PROCS</code>%0A<b>Compiler Used: </b><code>$KBUILD_COMPILER_STRING</code>%0A<b>Branch: </b><code>$CI_BRANCH</code>%0A<b>Top Commit: </b><code>$COMMIT_HEAD</code>%0A<a href='t.me/RandomiDn'>Channel]</a>"
+		tg_post_msg "<b>Build ON: [<a href='t.me/Random_iDn'>GROUP</a>]</b>%0ABUILDER NAME: <code>$AUTHOR</code>%0ABUILDER HOST: <code>$AUTHOR_HOST</code>%0A<b>Build [$COMPILER] Processing Triggers</b>%0A<b>Dev OS: </b><code>$DISTRO</code>%0A<b>Kernel Version: </b><code>$KERVER</code>%0A<b>Date: </b><code>$(TZ=$TZ date)</code>%0A<b>Device: </b><code>$MODEL[$DEVICE]</code>%0A<b>Line Host: </b><code>$(uname -a | awk '{print $2}')</code>%0A<b>Host Core Count : </b><code>$PROCS</code>%0A<b>Compiler Used: </b><code>$KBUILD_COMPILER_STRING</code>%0A<b>Branch: </b><code>$CI_BRANCH</code>%0A<b>Top Commit: </b><code>$COMMIT_HEAD</code>%0A<a href='t.me/RandomiDn'>CHANNEL]</a>"
 	fi
 
 	make O=out $DEFCONFIG
