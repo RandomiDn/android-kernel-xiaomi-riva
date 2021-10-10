@@ -48,13 +48,13 @@ ZIPNAME="RiroKernel"
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
 AUTHOR="Arrayfs"
-AUTHOR_HOST="CircleCi"
+AUTHOR_HOST="CircleCI"
 # Architecture
 ARCH=arm64
 # The name of the device for which the kernel is built
-MODEL="riva"
+MODEL="Xiaomi Riro 3"
 # The codename of the device
-DEVICE="Xiaomi Riro 3"
+DEVICE=riva
 # The defconfig which should be used. Get it from config.gz from
 # your device or check source
 DEFCONFIG=riva_defconfig
