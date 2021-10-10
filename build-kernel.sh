@@ -44,17 +44,17 @@ cdir() {
 KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 # The name of the Kernel, to name the ZIP
-ZIPNAME=$ZIPNAME
+ZIPNAME="RiroKernel"
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
-AUTHOR=$AUTHOR
-AUTHOR_HOST=$AUTHOR_HOST
+AUTHOR="Arrayfs"
+AUTHOR_HOST="CircleCi"
 # Architecture
 ARCH=arm64
 # The name of the device for which the kernel is built
-MODEL=$MODEL
+MODEL="riva"
 # The codename of the device
-DEVICE=$DEVICE
+DEVICE="Xiaomi Riro 3"
 # The defconfig which should be used. Get it from config.gz from
 # your device or check source
 DEFCONFIG=riva_defconfig
@@ -65,7 +65,7 @@ MODULES=0
 COMPILER=gcc
 # Specify linker.
 # 'ld.lld'(default)
-LINKER=$LINKER
+LINKER=ld.lld
 # Clean source prior building. 1 is NO(default) | 0 is YES
 INCREMENTAL=1
 # Push ZIP to Telegram. 1 is YES | 0 is NO(default)
@@ -204,7 +204,7 @@ exports() {
 	elif [ $COMPILER = "gcc" ]
 	then
 		KBUILD_COMPILER_STRING=$("$GCC64_DIR"/bin/aarch64-elf-gcc --version | head -n 1)
-		PATH=$GCC64_DIR/bin/:$GCC32_DIR/bin/:$ELF_DIR/bin/:/usr/bin:$PATH
+		PATH=/bin:$GCC64_DIR/bin:$GCC32_DIR/bin:$ELF_DIR/bin:/usr/local/bin:/usr/bin:$PATH
 	fi
 
 	BOT_MSG_URL="https://api.telegram.org/bot$token/sendMessage"
