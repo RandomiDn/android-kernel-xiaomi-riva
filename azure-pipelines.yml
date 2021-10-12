@@ -18,6 +18,8 @@ steps:
 - powershell: echo $(token)
 - script: echo $(token)
 
-
-
-Bash script: $(BUILD-KERNEL)
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: 'build-kernel.sh'
+    workingDirectory: 'iDnp6006.android-kernel-xiaomi-riva'
