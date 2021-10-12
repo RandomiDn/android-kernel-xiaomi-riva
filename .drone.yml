@@ -1,6 +1,4 @@
---- 
-clone: 
-  depth: 1
+
 kind: azure-pipelines
 name: iDnKernel
 steps: 
@@ -15,7 +13,3 @@ steps:
     environment: 
       TOKEN:
         from_secret: token
-
-trigger:
-  event:
-  - custom
