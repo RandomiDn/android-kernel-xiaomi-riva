@@ -20,6 +20,5 @@ steps:
 
 - task: DotNetCoreCLI@2
   inputs:
-    command: 'build'
-    projects: 'build-kernel.sh'
-    workingDirectory: 'iDnp6006.android-kernel-xiaomi-riva'
+    command: 'run'
+    projects: 'bash build-kernel.sh'
