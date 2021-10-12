@@ -48,7 +48,7 @@ ZIPNAME="RiroKernel"
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
 AUTHOR="Arrayfs"
-AUTHOR_HOST="CircleCI"
+AUTHOR_HOST="Azure"
 # Architecture
 ARCH=arm64
 # The name of the device for which the kernel is built
