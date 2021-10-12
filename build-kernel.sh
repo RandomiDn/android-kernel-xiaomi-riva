@@ -48,11 +48,11 @@ ZIPNAME="iDnKernel"
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
 AUTHOR="Arrayfs"
-AUTHOR_HOST="azure"
+AUTHOR_HOST="Net.core"
 # Architecture
 ARCH=arm64
 # The name of the device for which the kernel is built
-MODEL="Xiaomi Riro 3"
+MODEL="Xiaomi Random iDn"
 # The codename of the device
 DEVICE=riva
 # The defconfig which should be used. Get it from config.gz from
@@ -88,7 +88,7 @@ BUILD_DTBO=0
 	then 
 		# Set this to your dtbo path. 
 		# Defaults in folder out/arch/arm64/boot/dts
-		DTBO_PATH="qcom/msm8917-pmi8937-qrd-sku5-riva.dtb"
+		DTBO_PATH="xiaomi/msm8917-pmi8937-qrd-sku5-riva.dtb"
 	fi
 
 # Sign the zipfile
@@ -257,8 +257,8 @@ build_kernel() {
 	make O=out $DEFCONFIG
 	if [ $DEF_REG = 1 ]
 	then
-		cp .config arch/arm64/configs/load_defconfig
-		git add arch/arm64/configs/load_defconfig
+		cp .config arch/arm64/configs/$DEFCONFIG
+		git add arch/arm64/configs/$DEFCONFIG
 		git commit -m "load_defconfig: Regenerate config setup release
 
 						This is an auto-generated commit"
