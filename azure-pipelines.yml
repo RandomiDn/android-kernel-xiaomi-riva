@@ -17,6 +17,6 @@ variables:
 steps:
   - script: |
       echo ${{ variable.token }} # outputs initialValue
-      echo $(TOKEN)
+      echo $(token)
     displayName: First variable pass
   - bash: echo '${env:BUILD-KERNEL}'
