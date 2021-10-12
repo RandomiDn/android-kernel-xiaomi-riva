@@ -44,11 +44,11 @@ cdir() {
 KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 # The name of the Kernel, to name the ZIP
-ZIPNAME="RiroKernel"
+ZIPNAME="iDnKernel"
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
 AUTHOR="Arrayfs"
-AUTHOR_HOST="CircleCI"
+AUTHOR_HOST="azure"
 # Architecture
 ARCH=arm64
 # The name of the device for which the kernel is built
