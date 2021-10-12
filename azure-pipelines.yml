@@ -9,14 +9,18 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-
 variables:
-- name: token
-  value: TOKEN 
+ - name: token
+   value: TOKEN
 
-steps:
-  - script: |
-      echo ${{ variable.token }} # outputs TOKEN
-      echo $(token)
-    displayName: First token pass
-  - bash: echo 'bash $(BUILD-KERNEL)'
+steps: 
+- bash: echo $(token)
+- powershell: echo $(token)
+- script: echo $(token)
+
+container:
+name: build-kernel
+- task: BatchScript@1
+  inputs:
+    filename: 'build-kernel.sh'
+    modifyEnvironment: true
