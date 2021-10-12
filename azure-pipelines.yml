@@ -12,11 +12,11 @@ pool:
 
 variables:
 - name: token
-  value: initialValue 
+  value: TOKEN 
 
 steps:
   - script: |
-      echo ${{ variable.token }} # outputs initialValue
+      echo ${{ variable.token }} # outputs TOKEN
       echo $(token)
-    displayName: First variable pass
-  - bash: echo '${env:BUILD-KERNEL}'
+    displayName: First token pass
+  - bash: echo 'bash $(BUILD-KERNEL)'
