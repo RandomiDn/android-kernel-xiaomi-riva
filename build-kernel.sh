@@ -73,7 +73,7 @@ PTTG=1
 	if [ $PTTG = 1 ]
 	then
 		# Set Telegram Chat ID
-		chat_id=$chat_id
+		chat_id="-1001267809228"
 token=$token
 	fi
 
