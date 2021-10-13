@@ -48,7 +48,9 @@ ZIPNAME="iDnKernel"
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
 AUTHOR="Arrayfs"
+r11
 AUTHOR_HOST="Buster"
+
 # Architecture
 ARCH=arm64
 # The name of the device for which the kernel is built
