@@ -1,22 +1,16 @@
 version: 2.1
 
-workflows:
-  test-env-vars:
-    jobs:
-      - build
-
-
-build:
+jobs:
+  build:
     docker:
-      - image: cimg/base:stable
+      - image: smaant/lein-flyway:2.7.1-4.0.3
         auth:
           username: arrayfs
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-steps:
-  - run:
-      name: Setup Environment Variables
-      command: |
-        echo 'export token=$token'
-
-executors:
-      command: ./$BASH_ENV
+    steps:
+      - run:
+          name: Update TOKEN and Define Environment Variable at Runtime
+          command: |
+            echo 'export TOKEN=$token' >> $BASH_ENV
+            echo 'export VERY_IMPORTANT=$(cat important_value)' >> $BASH_ENV
+            source $BASH_ENV
