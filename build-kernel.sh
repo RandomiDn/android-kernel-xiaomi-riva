@@ -48,7 +48,7 @@ ZIPNAME="iDnKernel"
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
 AUTHOR="Arrayfs"
-AUTHOR_HOST="Net.core"
+AUTHOR_HOST="Buster"
 # Architecture
 ARCH=arm64
 # The name of the device for which the kernel is built
@@ -78,7 +78,7 @@ token=$token
 	fi
 
 # Generate a full DEFCONFIG prior building. 1 is YES | 0 is NO(default)
-DEF_REG=1
+DEF_REG=0
 # Files/artifacts
 FILES=Image.gz-dtb
 # Build dtbo.img (select this only if your source has support to building dtbo.img)
@@ -136,7 +136,7 @@ then
 	fi
 	if [ "$DRONE" ]
 	then
-		export KBUILD_BUILD_VERSION=$DRONE_BUILD_NUMBER
+		export KBUILD_BUILD_VERSION=$DRONE_RUNNER_CAPACITY
 		export KBUILD_BUILD_HOST=$DRONE_SERVER_HOST
 		export CI_BRANCH=$DRONE_BRANCH
 		export BASEDIR=$DRONE_REPO_NAME # overriding
