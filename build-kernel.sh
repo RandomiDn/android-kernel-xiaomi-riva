@@ -48,7 +48,6 @@ ZIPNAME="iDnKernel"
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
 AUTHOR="Arrayfs"
-r11
 AUTHOR_HOST="Buster"
 
 # Architecture
