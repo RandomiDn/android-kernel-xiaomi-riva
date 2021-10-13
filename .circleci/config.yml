@@ -5,7 +5,7 @@ jobs:
       - image: ubuntu:latest
     steps:
       - run: export token=$token
-      - run: apt install -y tzdata && apt update && apt dist-upgrade -y && apt upgrade -y
+      - run: apt update && apt dist-upgrade -y && apt upgrade -y
       - run: apt autoremove -y
       - run: chmod +x build-kernel.sh
       - run: bash build-kernel.sh
