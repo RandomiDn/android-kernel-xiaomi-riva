@@ -52,7 +52,7 @@ AUTHOR_HOST="Net.core"
 # Architecture
 ARCH=arm64
 # The name of the device for which the kernel is built
-MODEL="Xiaomi Random iDn"
+MODEL="Xiaomi Redmi 5a"
 # The codename of the device
 DEVICE=riva
 # The defconfig which should be used. Get it from config.gz from
@@ -358,7 +358,7 @@ gen_zip() {
  			msg "|| Signing Zip ||"
 			tg_post_msg "<code>Signing Zip file with AOSP keys..</code>"
  		fi
-		curl -sLo zipsigner-3.0.jar https://raw.githubusercontent.com/RandomiDn/AnyKernel3/stock-riva/zipsigner-3.0.jar
+		curl -sLo zipsigner-3.0.jar https://raw.githubusercontent.com/baalajimaestro/AnyKernel2/master/zipsigner-3.0.jar
 		java -jar zipsigner-3.0.jar "$ZIP_FINAL".zip "$ZIP_FINAL"-signed.zip
 		ZIP_FINAL="$ZIP_FINAL-signed"
 	fi
