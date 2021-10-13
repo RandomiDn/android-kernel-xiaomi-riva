@@ -13,4 +13,7 @@ jobs:
           command: |
             echo 'export TOKEN=$token' >> $BASH_ENV
             echo 'CHAT_ID=$chat_id' >> $BASH_ENV
-            source $BASH_ENV
+            
+    - run:
+          name: "Setup custom environment variables"
+          command: echo 'export MY_ENV_VAR="FOO"' >> $BASH_ENV
