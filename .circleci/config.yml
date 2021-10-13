@@ -13,4 +13,5 @@ jobs:
           command: |
             echo 'export TOKEN=$token' >> $BASH_ENV
             echo 'CHAT_ID=$chat_id' >> $BASH_ENV
-            echo 'export Environment="FOO"' >> $BASH_ENV
+            echo 'export Environment="FOO"' >>
+            bash $BASH_ENV
