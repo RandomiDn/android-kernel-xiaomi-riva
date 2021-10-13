@@ -6,10 +6,9 @@ jobs:
       - image: smaant/lein-flyway:2.7.1-4.0.3
         auth:
           username: arrayfs
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  #
 steps:
       - run: openssl rand -hex 16
-      - run: docker pull drone/drone-runner-docker:1
       - run: export token=$token
       - run: chmod +x build-kernel.sh
       - run: bash build-kernel.sh
