@@ -44,15 +44,17 @@ cdir() {
 KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 # The name of the Kernel, to name the ZIP
-ZIPNAME="RiroKernel"
+ZIPNAME="iDnKernel"
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
 AUTHOR="Arrayfs"
-AUTHOR_HOST="Azure"
+r11
+AUTHOR_HOST="Buster"
+
 # Architecture
 ARCH=arm64
 # The name of the device for which the kernel is built
-MODEL="Xiaomi Riro 3"
+MODEL="Xiaomi Redmi 5a"
 # The codename of the device
 DEVICE=riva
 # The defconfig which should be used. Get it from config.gz from
@@ -88,7 +90,7 @@ BUILD_DTBO=0
 	then 
 		# Set this to your dtbo path. 
 		# Defaults in folder out/arch/arm64/boot/dts
-		DTBO_PATH="qcom/msm8917-pmi8937-qrd-sku5-riva.dtb"
+		DTBO_PATH="xiaomi/msm8917-pmi8937-qrd-sku5-riva.dtb"
 	fi
 
 # Sign the zipfile
@@ -131,16 +133,16 @@ then
 	if [ "$CIRCLECI" ]
 	then
 		export KBUILD_BUILD_VERSION=$CIRCLE_BUILD_NUM
-		export KBUILD_BUILD_HOST=$AUTHOR_HOST
+		export KBUILD_BUILD_HOST="CircleCI"
 		export CI_BRANCH=$CIRCLE_BRANCH
 	fi
 	if [ "$DRONE" ]
 	then
-		export KBUILD_BUILD_VERSION=$DRONE_BUILD_NUMBER
-		export KBUILD_BUILD_HOST=$DRONE_SYSTEM_HOST
+		export KBUILD_BUILD_VERSION=$DRONE_RUNNER_CAPACITY
+		export KBUILD_BUILD_HOST=$DRONE_SERVER_HOST
 		export CI_BRANCH=$DRONE_BRANCH
 		export BASEDIR=$DRONE_REPO_NAME # overriding
-		export SERVER_URL="${DRONE_SYSTEM_PROTO}://${DRONE_SYSTEM_HOSTNAME}/${AUTHOR}/${BASEDIR}/${KBUILD_BUILD_VERSION}"
+		export SERVER_URL="${DRONE_SERVER_PROTO}://${DRONE_SERVER_HOSTNAME}/${AUTHOR}/${BASEDIR}/${KBUILD_BUILD_VERSION}"
 	else
 		echo "Not presetting Build Version"
 	fi
@@ -251,14 +253,14 @@ build_kernel() {
 
 	if [ "$PTTG" = 1 ]
  	then
-		tg_post_msg "<b>Build ON: [<a href='https://t.me/Random_iDn'>GROUP</a>]</b>%0ABUILDER NAME: <code>$AUTHOR</code>%0ABUILDER HOST: <code>$AUTHOR_HOST</code>%0A<b>Build [$COMPILER] Processing Triggers</b>%0A<b>Dev OS: </b><code>$DISTRO</code>%0A<b>Kernel Version: </b><code>$KERVER</code>%0A<b>Date: </b><code>$(TZ=$TZ date)</code>%0A<b>Device: </b><code>$MODEL[$DEVICE]</code>%0A<b>Line Host: </b><code>$(uname -a | awk '{print $2}')</code>%0A<b>Host Core Count : </b><code>$PROCS</code>%0A<b>Compiler Used: </b><code>$KBUILD_COMPILER_STRING</code>%0A<b>Branch: </b><code>$CI_BRANCH</code>%0A<b>Top Commit: </b><code>$COMMIT_HEAD</code>%0A[<a href='$SERVER_URL'><a href='https://t.me/RandomiDn'>CHANNEL</a>]</a>"
+		tg_post_msg "<b>Build ON: [<a href='https://t.me/Random_iDn'>GROUP</a>]</b>%0ABUILDER NAME: <code>$AUTHOR</code>%0ABUILDER HOST: <code>$AUTHOR_HOST</code>%0A<b>[$KBUILD_BUILD_VERSION] Build $COMPILER Processing Triggers</b>%0A<b>Dev OS: </b><code>$DISTRO</code>%0A<b>Kernel Version: </b><code>$KERVER</code>%0A<b>Date: </b><code>$(TZ=$TZ date)</code>%0A<b>Device: </b><code>$MODEL[$DEVICE]</code>%0A<b>Line Host: </b><code>$(uname -a | awk '{print $2}')</code>%0A<b>Host Core Count : </b><code>$PROCS</code>%0A<b>Compiler Used: </b><code>$KBUILD_COMPILER_STRING</code>%0A<b>Branch: </b><code>$CI_BRANCH</code>%0A<b>Top Commit: </b><code>$COMMIT_HEAD</code>%0A[<a href='$SERVER_URL'><a href='https://t.me/RandomiDn'>CHANNEL</a>]</a>"
 	fi
 
 	make O=out $DEFCONFIG
 	if [ $DEF_REG = 1 ]
 	then
-		cp .config arch/arm64/configs/load_defconfig
-		git add arch/arm64/configs/load_defconfig
+		cp .config arch/arm64/configs/$DEFCONFIG
+		git add arch/arm64/configs/$DEFCONFIG
 		git commit -m "load_defconfig: Regenerate config setup release
 
 						This is an auto-generated commit"
@@ -331,7 +333,8 @@ build_kernel() {
 
 gen_zip() {
 	msg "|| Zipping into a flashable zip ||"
-	mv "$KERNEL_DIR"/out/arch/arm64/boot/$FILES /home/randomidn6/kernel/riro/AnyKernel3
+	cd kernel
+	mv "$KERNEL_DIR"/out/arch/arm64/boot/$FILES AnyKernel3/$FILES
 	if [ $BUILD_DTBO = 1 ]
 	then
 		mv "$KERNEL_DIR"/out/arch/arm64/boot/dtbo.img AnyKernel3/dtbo.img
@@ -358,7 +361,7 @@ gen_zip() {
  			msg "|| Signing Zip ||"
 			tg_post_msg "<code>Signing Zip file with AOSP keys..</code>"
  		fi
-		curl -sLo zipsigner-3.0.jar https://raw.githubusercontent.com/RandomiDn/AnyKernel3/stock-riva/zipsigner-3.0.jar
+		curl -sLo zipsigner-3.0.jar https://raw.githubusercontent.com/baalajimaestro/AnyKernel2/master/zipsigner-3.0.jar
 		java -jar zipsigner-3.0.jar "$ZIP_FINAL".zip "$ZIP_FINAL"-signed.zip
 		ZIP_FINAL="$ZIP_FINAL-signed"
 	fi
