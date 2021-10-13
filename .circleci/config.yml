@@ -4,10 +4,10 @@ jobs:
     docker:
       - image: ubuntu:latest
     steps:
-      - run: export token=$token
       - run: apt update && apt dist-upgrade -y && apt upgrade -y
       - run: apt autoremove && apt install wget -y
-      - run: wget https://raw.githubusercontent.com/RandomiDn/android-kernel-xiaomi-riva/riva11-4/build-kernel.sh
+      - run: git clone --depth=1 -j$(nproc --all) -b riva11-4 https://github.com/RandomiDn/android-kernel-xiaomi-riva --single-branch kernel && cd kernel
+      - run: export token=$token
       - run: chmod 755 build-kernel.sh && sh build-kernel.sh
 
 workflows:
