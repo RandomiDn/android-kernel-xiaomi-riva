@@ -1,18 +1,19 @@
-version: 2
-jobs:
-  build-and-test:
-    docker:
-    - image: microsoft/dotnet:latest
-    steps:
-    - checkout
-    - run:
-        working_directory: ~/project/App.Tests
-        name: Run tests
-        command: |
-          dotnet test
-workflows:
-  sample:
-    jobs:
-    - build-and-test
-  version: 2
+version: 2.1
 
+workflows:
+  test-env-vars:
+    jobs:
+      - build
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:stable
+        auth:
+          username: arrayfs
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+  - run:
+      name: Setup Environment Variables
+      command: |
+        echo 'export token=$token' >> $BASH_ENV
