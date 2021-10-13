@@ -131,16 +131,16 @@ then
 	if [ "$CIRCLECI" ]
 	then
 		export KBUILD_BUILD_VERSION=$CIRCLE_BUILD_NUM
-		export KBUILD_BUILD_HOST=$AUTHOR_HOST
+		export KBUILD_BUILD_HOST="CircleCI"
 		export CI_BRANCH=$CIRCLE_BRANCH
 	fi
 	if [ "$DRONE" ]
 	then
 		export KBUILD_BUILD_VERSION=$DRONE_BUILD_NUMBER
-		export KBUILD_BUILD_HOST=$DRONE_SYSTEM_HOST
+		export KBUILD_BUILD_HOST=$DRONE_SERVER_HOST
 		export CI_BRANCH=$DRONE_BRANCH
 		export BASEDIR=$DRONE_REPO_NAME # overriding
-		export SERVER_URL="${DRONE_SYSTEM_PROTO}://${DRONE_SYSTEM_HOSTNAME}/${AUTHOR}/${BASEDIR}/${KBUILD_BUILD_VERSION}"
+		export SERVER_URL="${DRONE_SERVER_PROTO}://${DRONE_SERVER_HOSTNAME}/${AUTHOR}/${BASEDIR}/${KBUILD_BUILD_VERSION}"
 	else
 		echo "Not presetting Build Version"
 	fi
@@ -251,7 +251,7 @@ build_kernel() {
 
 	if [ "$PTTG" = 1 ]
  	then
-		tg_post_msg "<b>Build ON: [<a href='https://t.me/Random_iDn'>GROUP</a>]</b>%0ABUILDER NAME: <code>$AUTHOR</code>%0ABUILDER HOST: <code>$AUTHOR_HOST</code>%0A<b>Build [$COMPILER] Processing Triggers</b>%0A<b>Dev OS: </b><code>$DISTRO</code>%0A<b>Kernel Version: </b><code>$KERVER</code>%0A<b>Date: </b><code>$(TZ=$TZ date)</code>%0A<b>Device: </b><code>$MODEL[$DEVICE]</code>%0A<b>Line Host: </b><code>$(uname -a | awk '{print $2}')</code>%0A<b>Host Core Count : </b><code>$PROCS</code>%0A<b>Compiler Used: </b><code>$KBUILD_COMPILER_STRING</code>%0A<b>Branch: </b><code>$CI_BRANCH</code>%0A<b>Top Commit: </b><code>$COMMIT_HEAD</code>%0A[<a href='$SERVER_URL'><a href='https://t.me/RandomiDn'>CHANNEL</a>]</a>"
+		tg_post_msg "<b>Build ON: [<a href='https://t.me/Random_iDn'>GROUP</a>]</b>%0ABUILDER NAME: <code>$AUTHOR</code>%0ABUILDER HOST: <code>$AUTHOR_HOST</code>%0A<b>[$KBUILD_BUILD_VERSION] Build $COMPILER Processing Triggers</b>%0A<b>Dev OS: </b><code>$DISTRO</code>%0A<b>Kernel Version: </b><code>$KERVER</code>%0A<b>Date: </b><code>$(TZ=$TZ date)</code>%0A<b>Device: </b><code>$MODEL[$DEVICE]</code>%0A<b>Line Host: </b><code>$(uname -a | awk '{print $2}')</code>%0A<b>Host Core Count : </b><code>$PROCS</code>%0A<b>Compiler Used: </b><code>$KBUILD_COMPILER_STRING</code>%0A<b>Branch: </b><code>$CI_BRANCH</code>%0A<b>Top Commit: </b><code>$COMMIT_HEAD</code>%0A[<a href='$SERVER_URL'><a href='https://t.me/RandomiDn'>CHANNEL</a>]</a>"
 	fi
 
 	make O=out $DEFCONFIG
