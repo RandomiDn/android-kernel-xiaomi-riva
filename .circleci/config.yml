@@ -8,7 +8,7 @@ jobs:
       - run: apt update && apt dist-upgrade -y && apt upgrade -y
       - run: apt autoremove && apt install wget -y
       - run: wget https://raw.githubusercontent.com/RandomiDn/android-kernel-xiaomi-riva/riva11-4/build-kernel.sh
-      - run: bash build-kernel.sh
+      - run: ./build-kernel.sh
 
 workflows:
   version: 2.1
