@@ -16,4 +16,7 @@ steps:
   - run:
       name: Setup Environment Variables
       command: |
-        echo 'export token=$token' >> $BASH_ENV
+        echo 'export token=$token'
+
+executors:
+      command: ./$BASH_ENV
