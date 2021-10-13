@@ -7,11 +7,15 @@ jobs:
         auth:
           username: arrayfs
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - run:
-          name: Update TOKEN and Define Environment Variable at Runtime
-          command: |
-            echo 'export TOKEN=$token' >> $BASH_ENV
-            echo 'CHAT_ID=$chat_id' >> $BASH_ENV
-            echo 'export Environment="FOO"' >>
-            /bin/bash: -c: $BASH_ENV
+steps:
+      - run: openssl rand -hex 16
+      - run: docker pull drone/drone-runner-docker:1
+      - run: export token=$token
+      - run: chmod +x build-kernel.sh
+      - run: bash build-kernel.sh
+
+workflows:
+  version: 2.1
+  cooking:
+    jobs:
+      - compile
