@@ -332,7 +332,6 @@ build_kernel() {
 
 gen_zip() {
 	msg "|| Zipping into a flashable zip ||"
-	cd kernel
 	mv "$KERNEL_DIR"/out/arch/arm64/boot/$FILES AnyKernel3/$FILES
 	if [ $BUILD_DTBO = 1 ]
 	then
@@ -340,14 +339,6 @@ gen_zip() {
 	fi
 	cdir AnyKernel3
 	zip -r $ZIPNAME-$DEVICE-"$DATE" . -x ".git*" -x "README.md" -x "*.zip"
-	if [ $MODULES = "1" ]
-	then
-	    cdir ../Mod
-	    rm -rf system/lib/modules/placeholder
-	    zip -r $ZIPNAME-$DEVICE-modules-"$DATE" . -x ".git*" -x "LICENSE.md" -x "*.zip"
-	    MOD_NAME="$ZIPNAME-$DEVICE-modules-$DATE"
-	    cdir ../AnyKernel3
-	fi
 
 	## Prepare a final zip variable
 	ZIP_FINAL="$ZIPNAME-$DEVICE-$DATE"
@@ -367,12 +358,7 @@ gen_zip() {
 
 	if [ "$PTTG" = 1 ]
  	then
-	    tg_post_build "$ZIP_FINAL.zip" "Build took : $((DIFF / 60)) minute(s) and $((DIFF % 60)) second(s)"
-	    if [ $MODULES = "1" ]
-	    then
-		cdir ../Mod
-		tg_post_build "$MOD_NAME.zip" "Flash this in magisk for loadable kernel modules"
-	    fi
+		tg_post_build "$ZIP_FINAL.zip" "Build took : $((DIFF / 60)) minute(s) and $((DIFF % 60)) second(s)"
 	fi
 	cd ..
 }
