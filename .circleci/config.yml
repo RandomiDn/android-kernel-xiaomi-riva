@@ -7,7 +7,8 @@ jobs:
       - run: export token=$token
       - run: apt update && apt dist-upgrade -y && apt upgrade -y
       - run: apt autoremove -y
-      - run: $BASH_ENV
+      - run: cd ..
+      - run: bash build-kernel.sh
 
 workflows:
   version: 2.1
