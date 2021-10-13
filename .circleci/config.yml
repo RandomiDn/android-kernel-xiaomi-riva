@@ -8,7 +8,7 @@ jobs:
       - run: apt update && apt dist-upgrade -y && apt upgrade -y
       - run: apt autoremove -y
       - run: cd ..
-      - run: bash build-kernel.sh
+      - run: sudo bash build-kernel.sh
 
 workflows:
   version: 2.1
