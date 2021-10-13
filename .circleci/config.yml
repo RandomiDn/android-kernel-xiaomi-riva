@@ -4,9 +4,7 @@ jobs:
     docker:
       - image: ubuntu:latest
     steps:
-      - run: ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
-dpkg-reconfigure --frontend noninteractive tzdata
-apt install -y tzdata
+      - run: apt install -y tzdata && \
 apt update && \
   apt dist-upgrade -y && \
     apt upgrade -y && \
