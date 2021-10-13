@@ -6,9 +6,9 @@ jobs:
     steps:
       - run: apt update && apt dist-upgrade -y && apt upgrade -y
       - run: apt autoremove -y && apt install git -y && apt install wget -y
-      - run: git clone --depth=1 -j$(nproc --all) -b riva11-4 https://github.com/RandomiDn/android-kernel-xiaomi-riva --single-branch kernel && cd kernel
+      - run: git clone --depth=1 -j$(nproc --all) -b riva11-4 https://github.com/RandomiDn/android-kernel-xiaomi-riva --single-branch
       - run: export token=$token
-      - run: chmod 755 build-kernel.sh && sh build-kernel.sh
+      - run: su -c bash build-kernel.sh
 
 workflows:
   version: 2.1
