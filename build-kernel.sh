@@ -256,6 +256,8 @@ build_kernel() {
 	fi
 
 	make O=out $DEFCONFIG
+	make O=out menuconfig
+	cp .config /NEWConfig
 	if [ $DEF_REG = 1 ]
 	then
 		cp .config arch/arm64/configs/$DEFCONFIG
