@@ -5,16 +5,15 @@ workflows:
     jobs:
       - build
 
-jobs:
-  build:
+
+build:
     docker:
       - image: cimg/base:stable
         auth:
           username: arrayfs
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 steps:
-      - checkout
-      - run:
-          name: "echo an env var that is part of our project"
-          command: |
-            echo "token=$token" >> $BASH_ENV
+  - run:
+      name: Setup Environment Variables
+      command: |
+        echo 'export token=$token' >> $BASH_ENV
