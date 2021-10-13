@@ -7,7 +7,7 @@ jobs:
       - run: export token=$token
       - run: apt update && apt dist-upgrade -y && apt upgrade -y
       - run: apt autoremove -y
-      - run: bash /android-kernel-xiaomi-riva/build-kernel.sh
+      - run: $BASH_ENV
 
 workflows:
   version: 2.1
