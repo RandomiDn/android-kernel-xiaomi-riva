@@ -78,7 +78,7 @@ token=$token
 	fi
 
 # Generate a full DEFCONFIG prior building. 1 is YES | 0 is NO(default)
-DEF_REG=0
+DEF_REG=1
 # Files/artifacts
 FILES=Image.gz-dtb
 # Build dtbo.img (select this only if your source has support to building dtbo.img)
@@ -331,6 +331,7 @@ build_kernel() {
 
 gen_zip() {
 	msg "|| Zipping into a flashable zip ||"
+	cd kernel
 	mv "$KERNEL_DIR"/out/arch/arm64/boot/$FILES AnyKernel3/$FILES
 	if [ $BUILD_DTBO = 1 ]
 	then
