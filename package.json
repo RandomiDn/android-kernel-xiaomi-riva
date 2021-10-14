@@ -1,0 +1,22 @@
+{
+  "name": "riva-kernel",
+  "version": "1.0.0",
+  "description": "release kernel",
+  "main": "Build, kernel",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RandomiDn/android-kernel-xiaomi-riva.git"
+  },
+  "author": "Arrayfs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RandomiDn/android-kernel-xiaomi-riva/issues"
+  },
+  "homepage": "https://github.com/RandomiDn/android-kernel-xiaomi-riva#readme"
+}
