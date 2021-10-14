@@ -20,3 +20,6 @@
   },
   "homepage": "https://github.com/RandomiDn/android-kernel-xiaomi-riva#readme"
 }
+"publishConfig": {
+   "@RandomiDn:registry": "https://npm.pkg.github.com"
+ }
